@@ -1,0 +1,42 @@
+<h2>Lista de alumnos</h2>
+
+<button type="button" (click)="cargarAlumnos()">Recargar</button>
+
+@if (cargando()) {
+  <p>Cargando alumnos...</p>
+}
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (!cargando() && !error()) {
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombres</th>
+        <th>Carrera</th>
+        <th>Ciclo</th>
+        <th>Promedio</th>
+        <th>Estado académico</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (a of alumnos(); track a.id) {
+        <tr>
+          <td>{{ a.id }}</td>
+          <td>{{ a.nombres }}</td>
+          <td>{{ a.carrera }}</td>
+          <td>{{ a.ciclo }}</td>
+          <td>{{ a.promedio }}</td>
+          <td>{{ a.estadoAcademico }}</td>
+          <td>
+            <button type="button" (click)="eliminar(a.id)">Eliminar</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
